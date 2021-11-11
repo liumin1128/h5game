@@ -37,7 +37,7 @@ body {
     line-height: 190px;
     color: #fff;
 
-    transition: 1s;
+    transition: 0.5s;
     z-index: 99;
 }
 
@@ -126,4 +126,32 @@ body {
 .actor .box.box_3_3 {
     left: 605px;
     top: 605px;
+}
+
+.actor .box.box_value_2 {
+    background-color: rgb(239, 252, 176);
+}
+
+.actor .box.box_value_4 {
+    background-color: rgb(29, 205, 205);
+}
+
+.actor .box.box_value_8 {
+    background-color: rgb(145, 227, 73);
+}
+
+.actor .box.box_value_16 {
+    background-color: rgb(232, 244, 62);
+}
+
+.actor .box.box_value_32 {
+    background-color: rgb(235, 136, 43);
+}
+
+.actor .box.box_value_64 {
+    background-color: rgb(233, 195, 3);
+}
+
+.actor .box.box_value_128 {
+    background-color: rgba(128, 255, 255, 1);
 }
