@@ -24,8 +24,7 @@ body {
     background: rgba(255, 255, 255, 0.1);
 }
 
-.actor {
-}
+.actor {}
 
 .actor .box {
     position: absolute;
@@ -41,8 +40,90 @@ body {
     transition: 1s;
     z-index: 99;
 }
+
+
 .actor .box.remove {
     opacity: 0;
     z-index: 0;
 }
 
+
+.actor .box.box_0_0 {
+    left: 5px;
+    top: 5px;
+}
+
+.actor .box.box_0_1 {
+    left: 5px;
+    top: 205px;
+}
+
+.actor .box.box_0_2 {
+    left: 5px;
+    top: 405px;
+}
+
+.actor .box.box_0_3 {
+    left: 5px;
+    top: 605px;
+}
+
+.actor .box.box_1_0 {
+    left: 205px;
+    top: 5px;
+}
+
+.actor .box.box_1_1 {
+    left: 205px;
+    top: 205px;
+}
+
+.actor .box.box_1_2 {
+    left: 205px;
+    top: 405px;
+}
+
+.actor .box.box_1_3 {
+    left: 205px;
+    top: 605px;
+}
+
+.actor .box.box_2_0 {
+    left: 405px;
+    top: 5px;
+}
+
+.actor .box.box_2_1 {
+    left: 405px;
+    top: 205px;
+}
+
+.actor .box.box_2_2 {
+    left: 405px;
+    top: 405px;
+}
+
+.actor .box.box_2_3 {
+    left: 405px;
+    top: 605px;
+}
+
+.actor .box.box_3_0 {
+    left: 605px;
+    top: 5px;
+}
+
+.actor .box.box_3_1 {
+    left: 605px;
+    top: 205px;
+}
+
+.actor .box.box_3_2 {
+    left: 605px;
+    top: 405px;
+}
+
+.actor .box.box_3_3 {
+    left: 605px;
+    top: 605px;
+}
