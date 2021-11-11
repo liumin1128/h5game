@@ -1,5 +1,5 @@
 import "normalize.css";
-import cloneDeep from "lodash/cloneDeep";
+import "animate.css";
 import "./index.css";
 
 const WIDTH = 4;
@@ -12,24 +12,14 @@ for (let i = 0; i < 16; i++) {
 }
 
 let data = [
-  [2, 0, 4, 0],
-  [0, 0, 2, 2],
-  [2, 4, 4, 2],
-  [0, 0, 0, 2],
-
-  // [0, 0, 0, 0],
-  // [0, 0, 0, 2],
-  // [0, 0, 0, 2],
-  // [0, 0, 0, 2],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
+  [0, 0, 0, 0],
 ];
 
-function updateBox(box, i, j) {
-  box.setAttribute("class", "box box_" + (i + "_" + j));
-  box.style.left = i * 200 + 5 + "px";
-  box.style.top = j * 200 + 5 + "px";
-  box.innerText = data[i][j];
-}
 
+// 生成css
 // for (let i = 0; i < data.length; i++) {
 //   for (let j = 0; j < data[i].length; j++) {
 //     // let box = document.createElement("div");
@@ -43,6 +33,7 @@ function updateBox(box, i, j) {
 // }
 
 
+// 初始化
 for (let i = 0; i < data.length; i++) {
   for (let j = 0; j < data[i].length; j++) {
     if (data[i][j] === 0) {
@@ -57,6 +48,10 @@ for (let i = 0; i < data.length; i++) {
   }
 }
 
+// 生成第一个方块
+newBox()
+
+// 映射坐标，抹除方向上的异常
 function getCurrentBox(d, i, j) {
   if (d === 0) {
     return [j, i]
@@ -71,6 +66,7 @@ function getCurrentBox(d, i, j) {
 
 const sleep  =(t) => new Promise((resolve, reject) => {setTimeout(resolve, t)})
 
+// 随机生成一个方块
 async function newBox() {
   const list = [];
   for (let i = 0; i < 4; i++) {
@@ -87,11 +83,19 @@ async function newBox() {
 
     const [x,y] = list[index] 
 
-    data[x][y] = 2
+    const value = Math.random() > 0.5 ? 4 : 2
+
+    data[x][y] = value
     let box = document.createElement("div");
-    box.setAttribute("class", "box box_value_"+ 2 +" box_" + (y + "_" + x));
-    box.innerText = 2
+    box.setAttribute("class", "box animated bounceIn box_value_"+ value +" box_" + (y + "_" + x));
+    box.innerText = value
     document.querySelector(".actor").appendChild(box);
+
+    // setTimeout(() => {
+    //   box.setAttribute("class", "box bounceIn box_value_"+ value +" box_" + (y + "_" + x));
+    // },10)
+
+
   }
 }
 
@@ -99,29 +103,22 @@ let lock = false
 
 async function move(d) {
 
-  console.log("data")
-  console.log(data)
-
   if(lock) {
     return
   }
 
   lock = true
-  // const r = getCurrentBox(0, 0, 1);
-  // await sleep(1000)
-
 
   for (let i = 0; i < WIDTH; i++) {
     for (let j = 0; j < HEIGHT; j++) {
 
-      // await sleep(100)
-
-      async function comparet1 () {
+      async function compare () {
       
         const [x, y] = getCurrentBox(d, i, j);
         const dj = data[x][y]
 
 
+        // 如果当前方块为0，适用移动方案
         if (dj === 0) {
           for (let k = j + 1; k < HEIGHT; k++) {
             const [_x, _y] = getCurrentBox(d, i, k);
@@ -130,18 +127,20 @@ async function move(d) {
             if (dk !== 0) {
 
               const obj = document.querySelector(".box_" + _y + "_" + _x);
-              obj.setAttribute("class", "box box_value_"+ dk +" box_" + (y + "_" + x));
+              obj.setAttribute("class", "box  box_value_"+ dk +" box_" + (y + "_" + x));
               
               data[x][y] = data[_x][_y];
               data[_x][_y] = 0
 
-              comparet1()
+              // 递归调用
+              compare()
 
               break;
             }
           }
         }
 
+        // 如果当前方块不为0，适用比较方案
         if (dj !== 0) {
           for (let k = j + 1; k < HEIGHT; k++) {
             const [_x, _y] = getCurrentBox(d, i, k);
@@ -158,45 +157,39 @@ async function move(d) {
             const obj = document.querySelector(".box_" + y + "_" + x);
             const obk = document.querySelector(".box_" + _y + "_" + _x);
             
-            obk.setAttribute("class", "box box_value_"+ dk +" remove box_" + (y + "_" + x));
+            obk.setAttribute("class", "box  box_value_"+ dk +" remove box_" + (y + "_" + x));
             
             setTimeout(() => {
               obk.remove()
-            }, 1000)
+            }, 100)
 
             data[x][y] += data[_x][_y];
             data[_x][_y] = 0
 
             obj.innerText = data[x][y]
-            obj.setAttribute("class", "box box_value_"+ data[x][y] +" box_" + (y + "_" + x));
-
-            // comparet1()
+            obj.setAttribute("class", "box rubberBand animated once box_value_"+ data[x][y] +" box_" + (y + "_" + x));
 
             break;
-
           }
         }
       }
 
-      comparet1()
-   
+      compare()
     }
   }
 
-  await sleep(500)
   await newBox()
 
-  lock = false
+  setTimeout(() => {
+    lock = false
+  }, 300)
 
-  console.log(data)
+  // console.log(data)
 }
-
-// move();
 
 document.querySelector(".up").addEventListener("click", function () {
   move(0)
 })
-
 
 document.querySelector(".right").addEventListener("click", function () {
   move(1)
@@ -210,6 +203,7 @@ document.querySelector(".left").addEventListener("click", function () {
   move(3)
 })
 
+// 映射键盘按键
 document.body.addEventListener('keydown', (e) => {
   switch (e.keyCode) {
     case 38: {
