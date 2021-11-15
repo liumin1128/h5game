@@ -18,6 +18,9 @@ body {
 }
 
 .btns {
+  width: 100%;
+  max-width: 700px;
+  margin: auto;
   margin-top: 16px;
   display:flex;
   justify-content: space-around;
