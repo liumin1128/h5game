@@ -1,0 +1,51 @@
+.container .box.box_value_2 {
+    background-color: #58b5b6;
+}
+
+.container .box.box_value_4 {
+    background-color: #5bb25c;
+}
+
+.container .box.box_value_8 {
+    background-color: #9cb042;
+}
+
+.container .box.box_value_16 {
+    background-color: #c5c756;
+}
+
+.container .box.box_value_32 {
+    background-color: #cfa441;
+}
+
+.container .box.box_value_64 {
+    background-color: #cc783e;
+}
+
+.container .box.box_value_128 {
+    background-color: #be5e4f;
+}
+
+.container .box.box_value_256 {
+    background-color: #b66786;
+}
+
+.container .box.box_value_512 {
+    background-color: #f276ee;
+}
+
+.container .box.box_value_1024 {
+    background-color: #265491;
+}
+
+.container .box.box_value_2048 {
+    background-color: #5f91d1;
+}
+
+.container .box.box_value_4096 {
+    background-color: #58b1d7;
+}
+
+.container .box.box_value_8192 {
+    background-color: #5bb35c;
+}
